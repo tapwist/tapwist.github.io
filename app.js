@@ -1,11 +1,21 @@
 var x = prompt("1st string:");
 var y = prompt("2nd string:");
 
-x = x.toLowerCase();
-y = y.toLowerCase();
-
 x = x.replace(/\s+/g,'');
 y = y.replace(/\s+/g,'');
 
+x = x.toLowerCase();
+y = y.toLowerCase();
 
-console.log(x, y);
+if (x.length === y.length){
+  for (var i = 0; i < x.length; i++){
+  y = y.replace(x[i],'');
+  }
+  if (y === ''){
+    alert('YES');
+  } else {
+    alert('NO');
+  }
+} else {
+  alert('NO');
+}
