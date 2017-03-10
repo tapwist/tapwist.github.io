@@ -6,8 +6,6 @@ function sorted(t) {
   return z;
 }
 
-console.log(sorted(x), sorted(y));
-
 (sorted(x) === sorted(y)) ? alert('YES') : alert('NO');
 
 /*var x = prompt("1st string:");
