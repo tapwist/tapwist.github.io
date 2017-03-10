@@ -1,4 +1,16 @@
-var x = prompt("1st string:");
+var x = prompt('1st string:');
+var y = prompt('2nd string:');
+
+function sorted(t) {
+  var z = t.replace(/\s+/g,'').toLowerCase().split('').sort().join('');
+  return z;
+}
+
+console.log(sorted(x), sorted(y));
+
+(sorted(x) === sorted(y)) ? alert('YES') : alert('NO');
+
+/*var x = prompt("1st string:");
 var y = prompt("2nd string:");
 
 x = x.replace(/\s+/g,'');
@@ -18,4 +30,4 @@ if (x.length === y.length){
   }
 } else {
   alert('NO');
-}
+}*/
