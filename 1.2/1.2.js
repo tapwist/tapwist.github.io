@@ -1,5 +1,15 @@
+function counter() {
+  var value = 0;
+  return function() {
+    return value++;
+  };
+}
+
 for (var i = 0; i < 10; i++) {
-  setTimeout(console.log(i), 1000);
+  var x = counter(); 
+  setTimeout(function() {
+   console.log(x());
+  }, 1000);
 }
 
 /*setTimeout(function(){
