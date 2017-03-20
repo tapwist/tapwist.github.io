@@ -1,4 +1,4 @@
-function sum(a){
+/*function sum(a){
   var current = a;
   function next(b){
     current += b;
@@ -9,4 +9,11 @@ function sum(a){
   };
   return next;
 }
-alert(sum(1)(2)(-4)(5));
+alert(sum(1)(2)(-4)(5));*/
+
+function sum(a) {
+  return function (b) {
+    return arguments.length === 0 ? a : sum(a + b);
+  }
+}
+console.log(sum(1)());
