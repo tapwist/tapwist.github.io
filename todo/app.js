@@ -31,10 +31,6 @@ var todoList = [
     }
 ];
 
-Total.textContent = todoList.length;
-Done.textContent = 1;
-Left.textContent = Total.textContent - Done.textContent;
-
 // функция по генерации элементов
 function addTodoFromTemplate(todo) {
     var newElement = templateContainer.querySelector('.task').cloneNode(true);
@@ -147,6 +143,15 @@ function insertTodoElement(elem) {
         listElement.appendChild(elem);
     }
 }
+
+//начальная статистика
+Total.textContent = itemElementList.length;
+Done.textContent = 0;
+for (var i = 0; i<itemElementList.length; i++) {
+	if (itemElementList[i].classList.contains('task_done')) Done.textContent = parseInt(Done.textContent) + 1;
+}
+Left.textContent = Total.textContent - Done.textContent;
+
 
 // Фильтры:
 var filtr = document.querySelectorAll('[data-filter]');
