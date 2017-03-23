@@ -6,10 +6,9 @@ var itemElementList = listElement.children;
 var templateElement = document.getElementById('todoTemplate');
 var templateContainer = 'content' in templateElement ? templateElement.content : templateElement;
 
-var Total = document.querySelector('.statistic__total');
-var Done = document.querySelector('.statistic__done');
-var Left = document.querySelector('.statistic__left');
-
+var total = document.querySelector('.statistic__total');
+var done = document.querySelector('.statistic__done');
+var left = document.querySelector('.statistic__left');
 
 // сформируем задачки
 var todoList = [
@@ -36,7 +35,6 @@ function addTodoFromTemplate(todo) {
     var newElement = templateContainer.querySelector('.task').cloneNode(true);
     newElement.querySelector('.task__name').textContent = todo.name;
     setTodoStatusClassName(newElement, todo.status === 'todo');
-
     return newElement;
 }
 
@@ -71,19 +69,12 @@ function isDeleteBtn(target) {
 function changeTodoStatus(element) {
     var isTodo = element.classList.contains('task_todo');
     setTodoStatusClassName(element, !isTodo);
-	if (isTodo) {
-		Done.textContent = parseInt(Done.textContent) + 1;
-		Left.textContent -= 1;
-	} else {
-		Left.textContent = parseInt(Left.textContent) + 1;
-		Done.textContent -= 1;
-	}
+	stats();
 }
 
 function deleteTodo(element) {
-	(element.classList.contains('task_todo')) ? Left.textContent -= 1 : Done.textContent -= 1;
 	listElement.removeChild(element);
-	Total.textContent -= 1;
+	stats();
 }
 
 function onInputKeydown(event) {
@@ -105,8 +96,7 @@ function onInputKeydown(event) {
     var todo = createNewTodo(todoName);
     insertTodoElement(addTodoFromTemplate(todo));
     inputElement.value = '';
-	Total.textContent = parseInt(Total.textContent) + 1;
-	Left.textContent = parseInt(Left.textContent) + 1;
+	stats();
 }
 
 function checkIfTodoAlreadyExists(todoName) {
@@ -144,14 +134,13 @@ function insertTodoElement(elem) {
     }
 }
 
-//начальная статистика
-Total.textContent = itemElementList.length;
-Done.textContent = 0;
-for (var i = 0; i<itemElementList.length; i++) {
-	if (itemElementList[i].classList.contains('task_done')) Done.textContent = parseInt(Done.textContent) + 1;
+//статистика + начальная
+stats();
+function stats() {
+	return (total.textContent = itemElementList.length,
+	done.textContent = listElement.querySelectorAll('.task_done').length,
+	left.textContent = total.textContent - done.textContent)
 }
-Left.textContent = Total.textContent - Done.textContent;
-
 
 // Фильтры:
 var filtr = document.querySelectorAll('[data-filter]');
